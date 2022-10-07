@@ -30,7 +30,7 @@ jobs:
 
       - name: Test
         working-directory: ./hello-world
-        run: npm run test
+        run: npm run test -- --watch=false --browsers=ChromeHeadless
 
       - name: Deploy
         working-directory: ./hello-world
