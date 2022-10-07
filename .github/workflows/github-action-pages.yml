@@ -9,12 +9,16 @@ jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
 
+    
+
     steps:
+      defaults:
+        run:
+          shell: bash
+          working-directory: hello-world
+
       - name: "Checkout"
         uses: actions/checkout@v2
-
-      - name: "Move to working directory"
-        run: cd hello-world
 
       - name: "Set up Node.js"
         uses: actions/setup-node@v1
