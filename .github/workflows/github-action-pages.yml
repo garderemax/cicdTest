@@ -14,7 +14,6 @@ jobs:
     steps:
       - name: "Set up directory"
         run:
-          shell: bash
           working-directory: hello-world
 
       - name: "Checkout"
