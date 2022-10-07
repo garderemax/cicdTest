@@ -12,27 +12,28 @@ jobs:
     
 
     steps:
-      - name: "Set up directory"
-        run:
-          working-directory: hello-world
-
       - name: "Checkout"
         uses: actions/checkout@v2
 
       - name: "Set up Node.js"
+        working-directory: ./hello-world
         uses: actions/setup-node@v1
 
       - name: Install Dependencies
+        working-directory: ./hello-world
         if:
           steps.cache-nodemodules.outputs.cache-hit != 'true'
         run: npm ci
 
       - name: Build
+        working-directory: ./hello-world
         run: npm run build -- --prod
 
       - name: Test
+        working-directory: ./hello-world
         run: npm run test -- --prod
 
       - name: Deploy
+        working-directory: ./hello-world
         run: |
           npm run deploy
