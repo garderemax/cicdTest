@@ -26,11 +26,11 @@ jobs:
 
       - name: Build
         working-directory: ./hello-world
-        run: npm run build -- --prod
+        run: npm run build
 
       - name: Test
         working-directory: ./hello-world
-        run: npm run test -- --prod
+        run: npm run test
 
       - name: Deploy
         working-directory: ./hello-world
