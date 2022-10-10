@@ -33,12 +33,11 @@ jobs:
         run: npm run test -- --watch=false --browsers=ChromeHeadless
 
       - name: Conventional Changelog Action
-        working-directory: ./hello-world
         id: changelog
         uses: TriPSs/conventional-changelog-action@v3
         with:
           github-token: ${{ secrets.TOKEN_GITHUB_ACTION }}
-          #version-file: "./hello-world/package.json"
+          version-file: "./hello-world/package.json"
           skip-on-empty: "false"
           output-file: "false"
 
