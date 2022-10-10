@@ -37,6 +37,7 @@ jobs:
         uses: TriPSs/conventional-changelog-action@v3
         with:
           github-token: ${{ secrets.TOKEN_GITHUB_ACTION }}
+          version-file: "./hello-world/package.json"
           output-file: "false"
 
       - name: Create Release
