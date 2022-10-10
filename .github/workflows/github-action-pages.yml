@@ -38,6 +38,7 @@ jobs:
         with:
           github-token: ${{ secrets.TOKEN_GITHUB_ACTION }}
           version-file: "./hello-world/package.json"
+          skipping-empty-releases: "disabled"
           output-file: "false"
 
       - name: Create Release
