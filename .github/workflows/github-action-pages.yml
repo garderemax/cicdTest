@@ -33,14 +33,13 @@ jobs:
         run: npm run test -- --watch=false --browsers=ChromeHeadless
 
       - name: Conventional Changelog Action
-        id: changelog
         uses: TriPSs/conventional-changelog-action@v3
         with:
           github-token: ${{ secrets.TOKEN_GITHUB_ACTION }}
-          output-file: "false"
-          version-file: "./hello-world/package.json"
-          skip-version-file: "true"
-          skip-on-empty: "false"
+          output-file: 'false'
+          version-file: './hello-world/package.json'
+          skip-version-file: 'true'
+          skip-on-empty: 'false'
 
       - name: Create Release
         uses: actions/create-release@v1
