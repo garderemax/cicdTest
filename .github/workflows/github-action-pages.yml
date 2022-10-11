@@ -32,29 +32,26 @@ jobs:
         working-directory: ./hello-world
         run: npm run test -- --watch=false --browsers=ChromeHeadless
 
-      - name: Archive build
-        uses: actions/upload-artifact@v1
+      - name: Conventional Changelog Action
+        id: changelog
+        uses: TriPSs/conventional-changelog-action@v3
         with:
-          name: deploy_dist
-          path: dist
+          github-token: ${{ secrets.TOKEN_GITHUB_ACTION }}
+          output-file: "false"
+          version-file: "./hello-world/package.json"
+          skip-on-empty: "false"
+          skip-version-file: "true"
 
-      - name: Archive code coverage result
-        uses: actions/upload-artifact@v1
-        with:
-          name: deploy_coverage
-          path: coverage
-
-      - name: Checkout
-        uses: actions/checkout@v1
-
-      - name: Download build
-        uses: actions/download-artifact@v1
-        with:
-          name: deploy_dist
-
-      - name: Deploy to GitHub Pages
-        uses: JamesIves/github-pages-deploy-action@releases/v3
-        with:
+      - name: Create Release
+        uses: actions/create-release@v1
+        if: ${{ steps.changelog.outputs.skipped == 'false' }}
+        env:
           GITHUB_TOKEN: ${{ secrets.TOKEN_GITHUB_ACTION }}
-          BRANCH: gh-pages
-          FOLDER: deploy_dist/angular-demo
+        with:
+          tag_name: ${{ steps.changelog.outputs.tag }}
+          release_name: ${{ steps.changelog.outputs.tag }}
+          body: ${{ steps.changelog.outputs.clean_changelog }}
+
+      - name: Deploy
+        run: |
+          npm run deploy
